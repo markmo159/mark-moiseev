@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import resume from '../PDF/Mark Moiseev - CV FrontEnd.pdf'
 
 import {
   AppBar,
@@ -47,6 +48,7 @@ const Navbar = () => {
   const [displayClosed, setDisplayClosed] = useState('none');
 
   const handleClick = (dest) => {
+    console.log(dest)
     if(displayOpen === 'flex') {
       setDisplayOpen('none');
       setDisplayClosed('flex')
@@ -54,13 +56,13 @@ const Navbar = () => {
       setDisplayOpen('flex');
       setDisplayClosed('none')
     };
-    if(dest !== 'none'){
+    if(dest){
       scrolling(dest)
     }
 
   };
 
-  const scrolling = (dest) => {
+  const scrolling = (dest=null) => {
     document.getElementById(dest).scrollIntoView({
       behavior: 'smooth'
     });
@@ -77,12 +79,12 @@ const Navbar = () => {
             <Button sx={style.navBtn} color="inherit" onClick={() => scrolling('about')}>About Me</Button>
             <Button sx={style.navBtn} color="inherit" onClick={() => scrolling('portfolio')}>Portfolio</Button>
             <Button sx={style.navBtn} color="inherit" onClick={() => scrolling('contact')}>Contact Me</Button>
-            <Button sx={{border: '2px solid black'}} color="inherit" endIcon={<SendIcon />}>Resume</Button>
+            <Button href={resume} target="_blank" sx={{border: '2px solid black'}} color="inherit" endIcon={<SendIcon />}>Resume</Button>
           </Toolbar>
         </AppBar>
       </Box>
       <Box sx={style.smallNav}>
-        <IconButton sx={{zIndex: '100'}} color="primary" onClick={(e) => handleClick('none')}>
+        <IconButton sx={{zIndex: '100'}} color="primary" onClick={() => handleClick()}>
           <MenuIcon 
             sx={{
               border:'1px solid', 
@@ -116,7 +118,7 @@ const Navbar = () => {
           <Button sx={style.smallNavMenuBtn} color="inherit" onClick={() => handleClick('about')}>About Me</Button>
           <Button sx={style.smallNavMenuBtn} color="inherit" onClick={() => handleClick('portfolio')}>Portfolio</Button>
           <Button sx={style.smallNavMenuBtn} color="inherit" onClick={() => handleClick('contact')}>Contact Me</Button>
-          <Button sx={style.smallNavMenuBtn}  color="inherit" endIcon={<SendIcon />} onClick={() => handleClick()}>Resume</Button>
+          <Button sx={style.smallNavMenuBtn} href={resume} target="_blank" color="inherit" endIcon={<SendIcon />} onClick={() => handleClick()}>Resume</Button>
         </Box>
       </Box>
     </div>
